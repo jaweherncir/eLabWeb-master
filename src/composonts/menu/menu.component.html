@@ -1,0 +1,33 @@
+<div id="accordion">
+    <div class="card" *ngFor="let menu of menuProperities" >
+      <div class="card-header" id="heading{{menu.id}}">
+        <h5 class="mb-0">
+          <button class="btn btn-link" 
+          (click)="toggleMenu(menu.id || '')" 
+          [attr.aria-expanded]="menu.id === openedMenuId" 
+          [attr.aria-controls]="'collapse' + menu.id">
+          <i class="{{menu.icon}}"></i>&nbsp;{{menu.titre}}
+        </button>
+        
+        </h5>
+      </div>
+  
+      <div [id]="'collapse' + menu.id" 
+      class="collapse animated" 
+      [class.show]="menu.id === openedMenuId" 
+      attr.aria-labelledby="heading{{menu.id}}" 
+      data-parent="#accordion">
+   <div class="card-body animated" *ngIf="menu.sousMenu">
+     <div *ngFor="let sousMenu of menu.sousMenu">
+       <a href="javascript:void(0);" 
+          (click)="navigate(sousMenu.url)" 
+          class="menu-link animated">
+         <i class="{{sousMenu.icon}}"></i> {{sousMenu.titre}}
+       </a>
+     </div>
+   </div>
+ </div>
+ 
+    </div>
+  </div>
+  
